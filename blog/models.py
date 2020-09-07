@@ -245,3 +245,16 @@ class BodyImage(models.Model):
         image = InMemoryUploadedFile(outputIoStream, 'ImageField', "%s.jpg" % image.name.split(
             '.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
         return image
+
+
+class TrainingGroup(models.Model):
+    name = models.CharField(max_length=20, default='New Group')
+    link = models.TextField()
+    clicks = models.IntegerField(default=0)
+
+    def add_click(self):
+        self.clicks = self.clicks + 1
+        self.save()
+
+    def __str__(self):
+        return self.name

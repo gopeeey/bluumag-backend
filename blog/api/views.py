@@ -3,7 +3,18 @@ from rest_framework import mixins
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import permissions, status
-from blog.models import Post, Category, Group, Rating, Quote, BodyImage, Tag, Image, Question
+from blog.models import (
+    Post,
+    Category,
+    Group,
+    Rating,
+    Quote,
+    BodyImage,
+    Tag,
+    Image,
+    Question,
+    TrainingGroup
+)
 from .serializers import (
     PostSerializer,
     AddPostSerializer,
@@ -23,7 +34,8 @@ from .serializers import (
     EditImageSerializer,
     AddImageSerializer,
     QuestionSerializer,
-    AddQuestionSerializer,)
+    AddQuestionSerializer,
+    TrainingGroupSerializer)
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.utils.text import slugify
@@ -935,3 +947,22 @@ class WriterPostList(APIView):
         serialResult = WriterSearchPostSerializer(
             posts, many=True, context={"request": request}).data
         return Response({"total": length, "result": serialResult}, status=status.HTTP_200_OK)
+
+
+class TrainingGroupView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, id, operation):
+        if operation == "add":
+            try:
+                tGroup = TrainingGroup.objects.get(pk=int(id))
+            except:
+                return Response('group not found', status=status.HTTP_404_NOT_FOUND)
+            tGroup.add_click()
+            return Response('successful', status=status.HTTP_200_OK)
+
+        if operation == 'list':
+            tGroups = TrainingGroup.objects.all().order_by('id')
+            serialTGroups = TrainingGroupSerializer(
+                tGroups, many=True, context={"request": request}).data
+            return Response(serialTGroups, status=status.HTTP_200_OK)

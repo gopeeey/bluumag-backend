@@ -7,7 +7,8 @@ from .models import (
     Tag,
     Rating,
     Quote,
-    Question
+    Question,
+    TrainingGroup
 )
 
 # Register your models here.
@@ -19,3 +20,4 @@ admin.site.register(Tag)
 admin.site.register(Rating)
 admin.site.register(Quote)
 admin.site.register(Question)
+admin.site.register(TrainingGroup)

@@ -42,4 +42,6 @@ urlpatterns = [
     path('writer/postlist/', views.WriterPostList.as_view(),
          name='writerpostlistview'),
     url(r'^postviews/(?P<id>\d+)/$', views.ViewsAdd.as_view(), name="addviewview"),
+    url(r'^training/(?P<id>\d+)/(?P<operation>[a-z]+)/$',
+        views.TrainingGroupView.as_view(), name='traininggroupview')
 ]
