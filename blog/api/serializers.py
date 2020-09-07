@@ -8,7 +8,8 @@ from blog.models import (
     Quote,
     Image,
     Question,
-    BodyImage
+    BodyImage,
+    TrainingGroup
 )
 from accounts.models import MyUser
 
@@ -350,4 +351,15 @@ class BodyImageSerializer(serializers.ModelSerializer):
             'upload_normal',
             'upload_medium',
             'upload_small',
+        ]
+
+
+class TrainingGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainingGroup
+        fields = [
+            'id',
+            'name',
+            'link',
+            'clicks'
         ]

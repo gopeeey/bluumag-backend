@@ -8,6 +8,7 @@ django-storages==1.9.1
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
 docutils==0.15.2
+environ==1.0
 jmespath==0.10.0
 Pillow==7.1.2
 psycopg2==2.8.5
